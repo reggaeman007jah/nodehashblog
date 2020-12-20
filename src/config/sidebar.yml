@@ -4,6 +4,12 @@
   link: '/'
 - label: 'Getting started'
   link: '/getting-started'
+- label: Learning Diary
+  items:
+    - label: 'Daily Updates'
+      link: '/diary/diary'
+    - label: 'Objectives'
+      link: '/diary/objectives'
 - label: Progressive Web Apps
   items:
     - label: 'Basics'
