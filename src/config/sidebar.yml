@@ -10,6 +10,8 @@
       link: '/diary/diary'
     - label: 'Objectives'
       link: '/diary/objectives'
+    - label: 'Achievements'
+      link: '/diary/achievements'
 - label: Progressive Web Apps
   items:
     - label: 'Basics'
