@@ -1,11 +1,39 @@
 ---
-title: React Resources
-description: React Resources
+title: Node and Express
+description: Node and Express
 disableTableOfContents: false
 ---
 
-## React Resources
+## Net-Ninja - Node and Express
 
-PWA: Progressive web App.
+### Net-Ninja Node Lesson 6 - Express apps
 
-Behaves in a similar way to native apps, but does not require downloading from app or play store.
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/Lr9WUkeYSA8"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+
+Express is a framework, making node servers and services (much) easier to
+implement  
+Manages server-side logic, routing, responses etc  
+Makes code earlier to read - although not essential (node native will do the same thing)  
+Create an app.js to manage the express server  
+Import relevant elements, and set up a listener (on a port)  
+Then add paths (/, /about etc)  
+Each route has a req and res element  
+So each route has an instruction for each GET request, e.g. res.send  
+Express will assume status codes and content-type here, which is helpful  
+By adding different GET handlers, you can add new pages  
+If you have pages as separate html files, you can call those in your responses - res.sendFile + path
+.. but needs a second param that confirms the root of the project, so the path
+makes sense.  
+Adds nav elements to link between pages  
+Redirects are managed via res.redirect + new path (also sets status code)  
+Then create 404 page, via app.use  
+By placing at the end (bottom) of the file, it only triggers if the code reaches that point, so is in effect a catch-all for anything not routed
+beforehand
+Here we need to manually add the 404 status code.
