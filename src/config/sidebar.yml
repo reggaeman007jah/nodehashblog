@@ -52,6 +52,8 @@
       link: '/pwas/basics'
     - label: 'Resources'
       link: '/pwas/resources'
+    - label: 'Study'
+      link: '/pwas/study'
 - label: Security
   items:
     - label: 'Introduction'
