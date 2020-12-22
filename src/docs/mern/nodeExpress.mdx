@@ -39,11 +39,13 @@ Each route has a req and res element
 So each route has an instruction for each GET request, e.g. res.send  
 Express will assume status codes and content-type here, which is helpful  
 By adding different GET handlers, you can add new pages  
-If you have pages as separate html files, you can call those in your responses - res.sendFile + path - but needs a second param that confirms the root of the project, so the path makes sense.  
+If you have pages as separate html files, you can call those in your responses - res.sendFile + path - but needs a second
+param that confirms the root of the project, so the path makes sense.  
 Adds nav elements to link between pages  
 Redirects are managed via res.redirect + new path (also sets status code)  
 Then create 404 page, via app.use  
-By placing at the end (bottom) of the file, it only triggers if the code reaches that point, so is in effect a catch-all for anything not routed beforehand. Here we need to manually add the 404 status code.
+By placing at the end (bottom) of the file, it only triggers if the code reaches that point, so is in effect a catch-all
+for anything not routed beforehand. Here we need to manually add the 404 status code.
 
 ### Net-Ninja Node Lesson 7 - View engines  
 https://youtu.be/yXEesONd_54  
@@ -59,18 +61,24 @@ Ejs files hold normal HTML, but can also have dynamic content
 Now we change the app.js to res.render + ejs file name  
 All ejs pages here use a class of “content” to enable CSS styling later on
 
-Within ejs files you can also create content using ejf styling: <% const name=”myName” %>  
-If you want to render that value within HTML, you need to add an = sign, like: <%= name %>
+Within ejs files you can also create content using ejf styling:  
+If you want to render that value within HTML, you need to add an
 
-Referring to the app,js file, you can add data you send into the eks file, as a second param after naming the page you want to go to (as an object). In the example you can update the tab name using this method.
+Referring to the app,js file, you can add data you send into the eks file, as a second param after naming the page
+you want to go to (as an object). In the example you can update the tab name using this method.
 
-In the example, you send an object of blogs to a blog page. Once sent, you check that there are 1 or more results, using a simple if check. If more than one, use a forEach to cycle through results. For each element, show lines for title and content from the object.
+In the example, you send an object of blogs to a blog page. Once sent, you check that there are 1 or more results,
+using a simple if check. If more than one, use a forEach to cycle through results. For each element, show lines for
+title and content from the object.
 
 Add an ‘else’ to say “no blogs available, or something…
 
 This ^^^ is server-side rendering
 
-Next we cover ‘partials’ where we use mini-comps to save space and make pages smaller and cleaner. So nav, header and footer are good candidates for partials. Cut the nav code, place in a partials file, then link that partial from the relevant page - syntax is slightly different: <%- include (partials path) %>. Using minus sign enables certain characters, useful for pathing.
+Next we cover ‘partials’ where we use mini-comps to save space and make pages smaller and cleaner. So nav, header and
+footer are good candidates for partials. Cut the nav code, place in a partials file, then link that partial from the
+relevant page - syntax is slightly different: include (partials path) . Using minus sign enables certain characters,
+useful for pathing.
 
 Next we cover CSS  
 As we have already added a HEAD partial, the CSS <styles> can go into the HEAD partial.  
