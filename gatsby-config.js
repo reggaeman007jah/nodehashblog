@@ -4,7 +4,7 @@ module.exports = {
     defaultTitle: `NodeHash`,
     siteTitleShort: `NodeHash`,
     siteDescription: `NodeHash Blog`,
-    siteUrl: `https://rocketdocs.netlify.com`,
+    siteUrl: `https://nodehash.netlify.app`,
     siteAuthor: `@NodeHash`,
     siteImage: `/banner.png`,
     siteLanguage: `en`,
