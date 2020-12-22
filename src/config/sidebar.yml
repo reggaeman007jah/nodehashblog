@@ -6,18 +6,60 @@
   link: '/getting-started'
 - label: Learning Diary
   items:
-    - label: 'Daily Updates'
+    - label: 'Education Diary'
       link: '/diary/diary'
-    - label: 'Objectives'
-      link: '/diary/objectives'
-    - label: 'Achievements'
-      link: '/diary/achievements'
+    - label: 'Learning Objectives'
+      link: '/diary/learning'
+    - label: 'Skills and Capabilities'
+      link: '/diary/skills'
+- label: Blockchain
+  items:
+    - label: 'Blockchain Basics'
+      link: '/blockchain/basics'
+    - label: 'Non-Fungible Tokens'
+      link: '/blockchain/nfts'
+    - label: 'Crypto Arbitrage'
+      link: '/blockchain/arbitrage'
+    - label: 'Ethereum Programming'
+      link: '/blockchain/ethereum'
+    - label: 'Resources'
+      link: '/blockchain/resources'
+- label: MERN
+  items:
+    - label: 'MongoDB'
+      link: '/mern/mongo'
+    - label: 'Node and Express'
+      link: '/mern/nodeExprss'
+    - label: 'React'
+      link: '/mern/react'
+    - label: 'Resources'
+      link: '/mern/resources'
+- label: Product Management
+  items:
+    - label: 'Introduction'
+      link: '/productmgmt/intro'
+    - label: 'Product Management'
+      link: '/productmgmt/productmanagement'
+    - label: 'Community Management'
+      link: '/productmgmt/communitymgmt'
+    - label: 'Agile'
+      link: '/productmgmt/agile'
 - label: Progressive Web Apps
   items:
     - label: 'Basics'
       link: '/pwas/basics'
     - label: 'Resources'
       link: '/pwas/resources'
+- label: Security
+  items:
+    - label: 'Introduction'
+      link: '/security/intro'
+    - label: 'Ethical Hacking'
+      link: '/security/ethicalHacking'
+    - label: 'Application Security'
+      link: '/security/appSec'
+    - label: 'Resources'
+      link: '/security/resources'
 - label: Usage
   items:
     - label: 'Creating docs'
