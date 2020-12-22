@@ -12,6 +12,8 @@
       link: '/diary/learning'
     - label: 'Skills and Capabilities'
       link: '/diary/skills'
+    - label: 'My Projects'
+      link: '/diary/projects'
 - label: Blockchain
   items:
     - label: 'Blockchain Basics'
