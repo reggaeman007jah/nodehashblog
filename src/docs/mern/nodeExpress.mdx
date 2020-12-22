@@ -3,3 +3,133 @@ title: Node and Express Resources
 description: Node and Express Resources
 disableTableOfContents: false
 ---
+
+## Net-Ninja Course - Node and Express
+
+### Net-Ninja React Lesson 3 - Components & Templates  
+https://youtu.be/9D1x7-2FmTA  
+Components - self contained section of content, like a header, footer, sidebar etc  
+Components have their own templates and logic for that element - eg navbar will hold js logic to manage logouts  
+Action - understand what a root component is  
+In the example, the app.js is the root, and is JSX, not HTML.  
+JSX allows creation of HTML-style components  
+BABEL will convert JSX to HTML and renders to the DOM.  
+JSX requires className syntax, you cannot use class (as it is reserved for js)  
+className is converted to class after transpiling.  
+Lesson uses emmet (content)  
+Reminder: always export your component function! (so you can use it in other files)  
+Reminder: a component is a function! (often a JSX template)
+
+### Net-Ninja React Lesson 4 - Dynamic Values in Templates  
+https://youtu.be/pnhO8UaCgxg  
+Comps allow variables, to enable dynamic content  
+E.g. if you create a var above the return element of the component function, you cal refer to that var within code brackets.  
+You can also do, e.g. cals within curly brackets  
+Note: does not work for bools and objects
+
+### Net-Ninja Node Lesson 6 - Express apps  
+https://youtu.be/Lr9WUkeYSA8  
+Express is a framework, makes node servers and services (much) easier to implement  
+Manages server-side logic, routing, responses etc  
+Makes code earlier to read - although not essential (node native will do the same thing)  
+Create an app.js to manage the express server  
+Import relevant elements, and set up a listener (on a port)  
+Then add paths (home, about etc)  
+Each route has a req and res element  
+So each route has an instruction for each GET request, e.g. res.send  
+Express will assume status codes and content-type here, which is helpful  
+By adding different GET handlers, you can add new pages  
+If you have pages as separate HTML files, you can call those in your responses - res.sendFile plus path .. but needs a second
+param that confirms the root of the project, so the path makes sense.  
+Adds nav elements to link between pages  
+Redirects are managed via res.redirect + new path (also sets status code)  
+Then create 404 page, via app.use  
+By placing at the end (bottom) of the file, it only triggers if the code reaches that point, so is in effect a catch-all
+for anything not routed beforehand. Here we need to manually add the 404 status code.
+
+### Net-Ninja Node Lesson 7 - View engines  
+https://youtu.be/yXEesONd_54  
+Express is a framework, makes node servers and services (much) easier to implement  
+View or template engines allow dynamic data to be injected into your pages  
+Examples: Handlebars, Pug, EJS,  
+Install EJS  
+App.set in app.js to configure your template engine  
+By default it looks to the ‘views’ folder for content  
+Pages in there have a .ejs extension  
+Ejs files hold normal HTML, but can also have dynamic content
+
+Now we change the app.js to res.render + ejs file name  
+All ejs pages here use a class of “content” to enable CSS styling later on
+
+Within ejs files you can also create content using ejf styling:  
+If you want to render that value within HTML, you need to add an
+
+Referring to the app,js file, you can add data you send into the ejs file, as a second param after naming the page
+you want to go to (as an object). In the example you can update the tab name using this method.
+
+In the example, you send an object of blogs to a blog page. Once sent, you check that there are 1 or more results,
+using a simple if check. If more than one, use a forEach to cycle through results. For each element, show lines for
+title and content from the object.
+
+Add an ‘else’ to say “no blogs available, or something…
+
+This is server-side rendering
+
+Next we cover ‘partials’ where we use mini-comps to save space and make pages smaller and cleaner. So nav, header and
+footer are good candidates for partials. Cut the nav code, place in a partials file, then link that partial from the
+relevant page - syntax is slightly different: include (partials path) . Using minus sign enables certain characters,
+useful for pathing.
+
+Next we cover CSS  
+As we have already added a HEAD partial, the CSS styles can go into the HEAD partial.  
+Imported a font from google fonts, talked through the CSS elements
+
+### Net-Ninja Node Lesson 8 - Middleware  
+Middleware - code that is run on a server between getting a request and sending a response  
+Action - explore definitions of this  
+The use method is often used for middleware  
+The GET handler is also middleware  
+GET is specific to a certain route, USE applies to everything  
+The order of middleware is very important! Any USE below a successful GET will not be triggered.  
+Mware can: act as a logger for requests, do auth checks, parse JSON, issue 404s etc.  
+Runs an example of logging to console host path and method of each server request, using the USE mware (at the trop of the list)  
+Then introduces concept of NEXT, to allow progression after a USE fnc.  
+Simply use (req,res,next), then next() at end of mware fnc.  
+There are pre-canned mware fncs we can use also.  
+Morgan logs data. Helmet manages sessions (I think).  
+Example installs Morgan from NPM  
+app.use(morgan(‘dev’))  
+Other useful mware (express.static) enables us to dictate which of our files will be public.  
+If you name a folder, like Public, then you can enable content of this folder to be seen in the front end.  
+So, CSS can he held in public, no worries.
+
+### Net-Ninja Node Lesson 9 - MongoDB  
+https://youtu.be/bxsemcrY4gQ  
+noSQL / collections  
+documents are similar to js objects (KVPs)  
+Example uses MongoDB Atlas, which is a cloud hosted Mongo DB  
+Build free cluster  
+Create collection  
+DB and collection name needed  
+Create user (admin)  
+Action - what is SCRAM auth?  
+Select connect from application, to get connection string, and paste as a var in app.js  
+Uses Mongoose as a way to connect to the DB, as it seems easier and less verbose than the pure API.  
+Mongoose - ODM library - Object Document Mapping library  
+Essentially makes it easier to connect to DB.  
+Enables models that do certain things  
+In mongo, you make the schema first. (structure)  
+When you have a scheme, then you create a model for that schema  
+The model allows us to communicate with said collection  
+Install mongoose via npm  
+Then use mongoose.connect method (async task, so uses a .then promise)  
+Adds an options object to avoid deprecation warnings  
+Adds listener to occur after connection to DB is made  
+Creates folder for models  
+And folder for blogs  
+In blogs, create schema  
+Schema is defined here as an object, title, contact, content etc  
+Also sets a timestamps method, I guess for a ref ID  
+Then create model: Blog  
+Then export the model  
+Paused at 20:40
