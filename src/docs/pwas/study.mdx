@@ -1,0 +1,75 @@
+---
+title: PWA Study
+description: PWA Study
+disableTableOfContents: False
+---
+
+## Net-Ninja Course
+
+### https://github.com/reggaeman007jah/progressiveWebApp1
+
+### Net-Ninja PWA Lesson 1 - Intro
+
+https://youtu.be/4XT23X0Fjfk  
+https://www.youtube.com/redirect?v=4XT23X0Fjfk&event=video_description&q=https%3A%2F%2Fgithub.com%2Fiamshaunjp%2Fpwa-tutorial&redir_token=QUFFLUhqbXdkLS11aHJoRXJpQWwzSktUSjZ5UlVZY0R5d3xBQ3Jtc0tuYW45clU3WHlSZkF6R1F0dHZuMVdqTkJUOFBCU2lsWGtUZzQxM3FYUXNzYmNfZEpGLUhwMk13X0dsWFR0dUpyWW5xcGYwTzZGc2psUUZwZjBEcU1fSHNGS0k4SlpnbkJ3cTktVFdZY24wN0Z4d0tBdw%3D%3D
+
+PWAs enable native functionality without needing to learn native code  
+Creates an app-like feel - they in browser but feel and perform like apps  
+They are built using HTML CSS and JS only  
+They are accessed via a web address, you don't need to go to the app/play store  
+They can access device features like camera, GPS etc  
+They can also be used offline  
+They can deliver push notifications
+
+## Net-Ninja PWA Lesson 2 - Setup
+
+https://youtu.be/JQaL5YiSuqE  
+Lesson covers starter project set up - basic code, including CSS and JS, as well as CSS framework (Materialize)
+Uses 'live Server' to view/test results in browser
+
+## Net-Ninja PWA Lesson 3 - Web App Manifest
+
+https://youtu.be/AlEdGOLhuM8  
+https://github.com/iamshaunjp/pwa-tutorial/tree/lesson-3  
+Web App Manifest file is essential for a PWA - Will hold key info, including logo image and name
+Adds - Manifest.json - in root  
+By adding “display - standalone” it will not include browser bar - key to app look and feel  
+Includes lots if different icon sizes to be used by different browsers and systems  
+These icons are listed in the manifest  
+Link the index.html file to the manifest file (in head), as you would a CSS stylesheet
+
+## Net-Ninja PWA Lesson 4 - Android Emulator
+
+https://youtu.be/1VVKhnHNBeQ  
+Android Studio is used to run emulated tests  
+This lesson runs through process of loading an emulator device for testing  
+Explains the way to get localhost showing on a separated emulated device, via 10.0.2.2:5500  
+At this stage I loaded repo onto a Netlify server, and tested on iphone - I was able to add to homescreen successfully  
+Without Service Workers, user needs to add the page to their homescreen manually  
+SWs will eventually enable an option (for adding to home screen) to be preented to user
+
+## Net-Ninja PWA Lesson 5 - IOS Support
+
+https://youtu.be/jy6hX48pRHw
+An additional step is needed to display icons on an iPhone (default is to use an automated screenshot)  
+Observation - it is very easy to create the homescreen element on a phone, which is a large part of the app process
+
+## Net-Ninja PWA Lesson 6 - Service Workers
+
+https://youtu.be/hxiggHZOGlQ
+SWs allow you to load content offline  
+They also enable background sync - e.g. allows for an online-only action (like a status update) to be cached offline and pushed through when a connection is established  
+Push notifications - e.g. reminders  
+SWs are just js files, but run on a different thread to normal browser js files - they cannot access the DOM  
+They run in the background, but they react to events happening in the browser: push, fetch etc
+
+## Net-Ninja PWA Lesson 7 - Service Worker Lifecycle
+
+https://youtu.be/NhQfvZoRb2Q
+Scope is important to SWs, they need to be in root to access root files.
+App.js has the task of informing the browser that sw.js should be seen as a SW, and allocated its own SW thread.
+When registered by the browser, there is an ‘install event’
+Once registered, a SW will not be replaced when the browser reloads the page
+Once registered, the SW becomes ‘Active’.
+At this stage it can detect when something has changed, and can listen to get / post events.
+Note - this is important, and I don’t yet fully understand it!!!
