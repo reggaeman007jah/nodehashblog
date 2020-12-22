@@ -31,7 +31,7 @@
     - label: 'MongoDB'
       link: '/mern/mongo'
     - label: 'Node and Express'
-      link: '/mern/nodeExprss'
+      link: '/mern/nodeExpress'
     - label: 'React'
       link: '/mern/react'
     - label: 'Resources'
