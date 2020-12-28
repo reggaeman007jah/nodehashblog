@@ -197,4 +197,271 @@ app.listen(3000, (err) => {
 
 <br />{' '}
 
-Typical
+"Middleware is how express handles a sequence of functions"  
+"Middleware is a series of functions"  
+Steve Griffith
+
+Some things should be processed for each and every request (e.g. a CORS request, or auth), whereas some things should only be processed once.
+
+In this lesson, Steve shows how to create functions in a file, how to export them, and how to import them into app.js.
+
+So, app.use (fnc) will be run for each request that comes in.
+
+Tests are run using CURL, not via the browser dev panel.
+
+Here, we can generate a response that the client would see:
+
+```js title=app.js
+app.get('/', how, sup, (req, res) => {
+  res.send({ data: 'hi' });
+});
+```
+
+Next, we cover the three params of middleware functions: req, res and next. Without next, middlewares will hang.
+
+The last middleware function does not need a next instruction.
+
+Steve also demonstrates that you can have multiple mware functions from a specific endpoint - how + sup + (req,res) etc.
+
+Lastly, we bring in CORS and apply to all incoming requests - app.use(cors());
+
+Lesson code:
+
+```js title=app.js
+//Understanding Middleware
+'use strict';
+const express = require('express');
+const app = express();
+const cors = require('cors');
+
+const { sup, how } = require('./middle');
+
+app.use(sup);
+app.use(cors());
+
+app.get('/', how, sup, (req, res) => {
+  res.send({ data: 'hi' });
+});
+
+app.listen(3000, (err) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log('listening on port 3000');
+});
+```
+
+```js title=middle.js
+const sup = (req, res, next) => {
+  console.log(req.method);
+  console.log('sup');
+  next();
+};
+
+const how = (req, res, next) => {
+  console.log('how you doin?');
+  next();
+};
+
+module.exports = { sup, how };
+```
+
+<br />
+
+### Lesson 4 - Understanding HTTP Request Verbs
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/Pm28JXFAu4Y"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+
+<br />{' '}
+
+Here we explore the main verbs of express. We also explore Postman, allowing the ability to test different verbs with different URLs.
+
+method + endpoint = route
+
+GET = read  
+This can be everything, or just one thing - use of :id params enable the endpoint to read just one thing  
+POST = sending data from client / creating something new (e.g. form data)  
+so, req.body can contain data used with POST.
+PUT / PATCH = updating data.  
+PUT will read, but if it does not exist it will create it. Patch can only manage things that already exist.
+DELETE = will delete a param/id, should ofc be used with auth  
+HEAD = useful for testing - e.g status 200 responses.
+OPTIONS = enables a user to use this to establish what they are allowed to do.
+So, this would contain a list of verbs that are allowed (PUT, PATCH etc). You can also use this to allow CORS on the server.  
+You can also state that there should be no data sent via this route.
+
+In this lesson, we explore the use of postman when getting ans posting data.
+
+Lesson 4 Lesson Code
+
+```js title=app.js
+'use strict';
+const data = require('./data'); //data.channels[n].id  .name  .last_update
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+app.get('/api/channel', (req, res) => {
+  // return the list of channels
+  // respond with a 200
+  res.json(data);
+  console.log('GET', data.channels);
+});
+
+app.get('/api/channel/:id', (req, res) => {
+  // return specific channel
+  // respond with a 200
+  let obj = data.channels.find((item) => item.id == parseInt(req.params.id));
+  res.json(obj);
+  console.log('GET', obj);
+});
+
+app.post('/api/channel', (req, res) => {
+  // add new channel then return new list
+  // respond with a 201
+  let { name } = req.body;
+  console.log(req.body);
+  let id =
+    data.channels.reduce((prev, curr) => {
+      return prev < curr.id ? curr.id : prev;
+    }, 0) + 1;
+  let last_update = Date.now();
+  let obj = { id, name, last_update };
+  data.channels.push(obj);
+  res.status(201).json(obj);
+  console.log('POST', data.channels);
+});
+
+app.put('/api/channel/:id', (req, res) => {
+  // replace a channel based on id
+  // respond with 200 or 204
+  // 202 if the operation is async and still pending
+  // Basically an UPDATE but we could also do an INSERT if the id is available
+  // Or we could choose to create a new id and do an INSERT if the id does not exist
+  let id = parseInt(req.params.id);
+  let name = req.body.name;
+  let last_update = Date.now();
+  let idx = data.channels.findIndex((item) => item.id === id);
+  data.channels[idx].name = name;
+  data.channels[idx].last_update = last_update;
+  res.status(200).json(data.channels[idx]);
+  console.log('PUT', data.channels);
+});
+
+app.patch('/api/channel/:id', (req, res) => {
+  // edit a channel
+  // respond with 200 or 204
+  // 202 if the operation is async and still pending
+  let id = req.params.id;
+  let name = req.body.name;
+  let last_update = Date.now();
+  let idx = data.channels.findIndex((item) => item.id === id);
+  data.channels[idx].name = name;
+  data.channels[idx].last_update = last_update;
+  res.status(200).json(obj);
+  console.log('PATCH', data.channels);
+});
+
+app.delete('/api/channel/:id', (req, res) => {
+  // delete a channel
+  // respond with 200 or 204
+  // 202 if the operation is async and still pending
+  let id = req.params.id;
+  data.channels = data.channels.filter((item) => item.id !== id);
+  res.status(204).end();
+  console.log('DELETE', data.channels);
+});
+
+app.head('/api/channel', (req, res) => {
+  //return same headers as get. no content. to check that endpoint is functional
+  res.status(200).end();
+});
+
+app.options('/api/channel', (req, res) => {
+  // return headers including ALLOW to say what methods are allowed
+  res.status(200);
+  res.set('Allow', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
+  res.set('Access-Control-Allow-Origin', '*'); //cors
+  res.set('Content-Length', '0');
+  res.end();
+});
+
+/**
+  '200': 'OK',
+  '201': 'Created',
+  '202': 'Accepted',
+  '204': 'No Content',
+ */
+
+app.listen(3000, (err) => {
+  if (err) {
+    return console.log(err);
+  }
+  console.log('listening on port', 3000);
+});
+```
+
+```html title=client.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Send Requests to a Server</title>
+  </head>
+  <body>
+    <pre id="output"></pre>
+    <script>
+      let url = 'http://localhost:3000/api/channel';
+      // url = url + "/1";
+
+      let h = new Headers();
+      h.append('Content-Type', 'application/json');
+
+      let data = JSON.stringify({ name: 'Steve Griffith' });
+
+      let req = new Request(url, {
+        method: 'POST',
+        headers: h,
+        body: data,
+      });
+
+      fetch(req)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          document.getElementById('output').textContent = JSON.stringify(
+            data,
+            null,
+            2
+          );
+        });
+    </script>
+  </body>
+</html>
+```
+
+```js title=data.js
+let data = {
+  channels: [
+    { id: 1, name: 'Wes Bos', last_update: 1579748107846 },
+    { id: 2, name: 'Fun Fun Function', last_update: 1579229707118 },
+    { id: 3, name: 'Brad Traversy', last_update: 1578970507005 },
+    { id: 4, name: 'TipTut', last_update: 1575946507312 },
+    { id: 5, name: 'Colt Steele', last_update: 1577933707123 },
+    { id: 6, name: 'Net Ninja', last_update: 1577674507000 },
+  ],
+};
+
+module.exports = data;
+```
