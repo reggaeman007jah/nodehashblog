@@ -1,0 +1,128 @@
+---
+title: Express Resources
+description: Express Resources - Steve Griffith
+disableTableOfContents: false
+---
+
+## Mongo Resources
+
+Note, the full playlist can be found here: https://gist.github.com/prof3ssorSt3v3/81883fbae73b98d608f04be9c7eafe62
+
+### Lesson 1 - Quickstart with Express Web Server Framework
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/cMbJ8hatqJ8"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+
+Full documentation for express.js can be found here: expressjs.com
+
+Express can be used to create a server-hosted web site, or an api that servers other services (apps etc).
+
+```bash
+npm init -y
+npm i express —save
+create app.js
+```
+
+npm init -y // to get started to get package.json
+npm i express —save // to install express
+create app.js // this will be the main server file
+
+```js title=app.js
+“use strict”;
+const express = require(“express”);
+const app = express();
+
+// Then add the most basic server functionality:
+app.listen(3000, (err) =>{
+    if (err) {
+    console.log(“there was a problem: “, err);
+    return;
+}
+console.log (“Listening on port 3000”);
+});
+```
+
+In the cmd line, type:
+
+```bash
+node app.js
+```
+
+... to run the server.
+
+Next, add routes (URLs) that can be used as endpoints.
+
+```js title=app.js
+app.get("/", (req, res) => {
+console.log(req.url);
+res.send("<h1>Hello</h1>"); //determine the content-type automatically
+})
+
+app.listen(3000, (err) =>{
+if (err) {
+console.log(“there was a problem: “, err);
+return;
+}
+console.log (“Listening on port 3000”);
+});
+```
+
+Then re-run the server and check the results in a browser (localhost:3000).
+
+Note: express will auto-detect the header type (as per the comment aove).
+Also sets up an eTag, which acts as an identifier for the file.
+
+Note: res.redirect can be used to redirect traffic to a new url/endpoint.
+
+```js title=app.js
+app.get('/old', (req, res) => {
+  res.redirect(301, '/new');
+});
+
+app.get('/new', (req, res) => {
+  res.send('<h2>NEW</h2>');
+});
+```
+
+For any one endpoint, such as '/', you can configure a number of verbs, like GET, PATCH, PUT, DELETE etc. Of
+course, the action that should take place as a result of a verb should be in the code block section of each middleware.
+
+Full code:
+
+```js title=app.js
+'use strict';
+const express = require('express');
+const app = express();
+
+app
+  .get('/', (req, res) => {
+    console.log(req.url);
+    res.send('<h1>Hello</h1>'); //determine the content-type automatically
+  })
+  .post('/', (req, res) => {})
+  .patch('/', (req, res) => {})
+  .put('/', (req, res) => {})
+  .delete('/', (req, res) => {});
+
+app.get('/old', (req, res) => {
+  res.redirect(301, '/new');
+});
+
+app.get('/new', (req, res) => {
+  res.send('<h2>NEW</h2>');
+});
+
+app.listen(3000, (err) => {
+  if (err) {
+    console.log('there was a problem', err);
+    return;
+  }
+  console.log('listening on port 3000');
+});
+```
