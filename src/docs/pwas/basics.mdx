@@ -4,34 +4,38 @@ description: PWA Basics
 disableTableOfContents: true
 ---
 
-PWA: Progressive Web App
+Progressive Web Apps - General Notes
 
-Behaves in a similar way to native apps, but does not require downloading from app or play store.  
-PWAs are websites that create icons on your homescreen, on both your desktop and mobile phone.  
-They can - to a degree - operate offline.  
-Fast / Integrated / Reliable / User Engagement.  
-Fast - speed is similar to mobile apps, even though they are essentially browser-based elements.  
-Reliable - is should work offline.  
-UX - web push means it is always up to date (push even when browser is off).  
-Service Workers are key to these capabilities by caching data - this enables some functionality even while offline.  
-Service workers also handle push notifications, and enable access to phone components like camera.  
-A SW is just a script that runs in the background.  
-You run a check first, in order to see if the browser understands SWs.  
-You can see whether they are working by looking in teh dev tools.  
-Workbox is a library that manages SWs for you.  
-Goal is not to get users to download an app, it is to get them to use your service.  
-Not all devices support service workers.  
-HTTPS is a key component to PWAs (i.e. the green lock).  
-The green lock tells the user your site/service is secure, data is being sent confidentially, and that no one is listening.  
-PWAs can be created over time (progressively).  
-PWAs also us the Web App Manifest - this simple JSON file holds key info for each page in your app.  
-You need this element to enable your site to be shown on a mobile screen, just like a normal app.  
-As this is delivered outside of the app/play stores, there is no costs payable to those services.  
-This works on a single codebase, so no native code needed. This works on all devices (relatively) equally.  
-Perf SEO etc is assessed by Google Lighthouse - this is a guide to how close you are to having a PWA.
+Mobile apps are rarely downloaded onto devices - reach is poor, but usage is high  
+Websites have much better reach but suffer from performance and lack of app-feel  
+PWAs attempt to bring together best of both worlds - easy reach + app-like performance
 
 At its core, a PWA needs only 4 files:  
 index.html  
 logo.png  
 manifest.JSON  
 service-worker.js
+
+They behave in a similar way to native apps, but do not require downloading from app/play store (note, no store fees).  
+PWAs are websites that can also create icons on your homescreen, on both your desktop and mobile phone.  
+They can - to a degree - operate offline, depending on your caching strategy.  
+Fast / Integrated / Reliable / User Engagement.  
+ Fast - speed is similar to mobile apps, even though they are essentially browser-based elements.  
+ Integrated - they allow access to device APIs like camera and GPS.  
+ Reliable - it should work offline.  
+ User Engagement - web push means it is always up to date (can push even when browser is off).  
+Service Workers are key to these capabilities by caching data - this enables offline functionality.  
+Service workers also handle push notifications, and enable access to phone components like camera.  
+An SW is just a script that runs in the background.  
+They can be inspected using the standard Chroms dev tools.  
+It is single-threaded, but does not operate on the DOM thread, rather, it hs its own thread.  
+Not all devices support service workers, so one should always check (via code) that the client browser can process / understand SWs.  
+Libraries can be used to manage SWs, e.g. workbox.  
+HTTPS is a key component to PWAs (i.e. the green lock) - localhost is an exception for development.  
+The green lock tells the user your site/service is secure, data is being sent confidentially, and that no one is listening.  
+PWAs can be created over time (i.e. progressively).  
+PWAs also use the 'Web App Manifest' - a simple JSON file that holds key info for each page in your app.  
+You need this element to enable your site to be shown on a mobile screen, just like a normal app.  
+This solution works on a single codebase, so no native code is needed.  
+I.e. it works on all devices (relatively) equally.  
+Google Lighthouse has tools to track your step-progression to achieving PWA status.

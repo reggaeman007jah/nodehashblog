@@ -56,8 +56,8 @@
       link: '/pwas/basics'
     - label: 'Resources'
       link: '/pwas/resources'
-    - label: 'Study'
-      link: '/pwas/study'
+    - label: 'Net Ninja'
+      link: '/pwas/netNinja'
 - label: Security
   items:
     - label: 'Introduction'
