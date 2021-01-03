@@ -1,6 +1,6 @@
 ---
-title: PWA Study
-description: PWA Study
+title: PWA Study - Net Ninja
+description: PWA Study - Net Ninja
 disableTableOfContents: False
 ---
 
@@ -21,7 +21,7 @@ Course repo: https://github.com/iamshaunjp/pwa-tutorial/tree/lesson-3
 ></iframe>
 
 PWAs enable native functionality without needing to learn native code  
-Creates an app-like feel - they in browser but feel and perform like apps  
+Creates an app-like feel - they are loaded via the browser but feel and perform like native apps  
 They are built using HTML CSS and JS only  
 They are accessed via a web address, you don't need to go to the app/play store  
 They can access device features like camera, GPS etc  
@@ -96,7 +96,8 @@ screen) to be preented to user
 ></iframe>
 
 An additional step is needed to display icons on an iPhone (default is to use an
-automated screenshot) Observation - it is very easy to create the homescreen
+automated screenshot).  
+Observation - it is very easy to create the homescreen
 element on a phone, which is a large part of the app process
 
 ### Net-Ninja PWA Lesson 6 - Service Workers
@@ -110,12 +111,12 @@ element on a phone, which is a large part of the app process
   allowfullscreen
 ></iframe>
 
-SWs allow you to load content offline They also enable background sync - e.g.
-allows for an online-only action (like a status update) to be cached offline and
-pushed through when a connection is established Push notifications - e.g.
-reminders SWs are just js files, but run on a different thread to normal browser
-js files - they cannot access the DOM They run in the background, but they react
-to events happening in the browser: push, fetch etc
+SWs allow you to load content offline.  
+They also enable background sync - e.g. allows for an online-only action (like a status update) to be cached offline and
+pushed through when a connection is established.  
+Push notifications - e.g. reminders SWs, are just js files, but run on a different thread to normal browser
+js files - they cannot access the DOM.  
+They run in the background, but they react to events happening in the browser: push, fetch etc.
 
 ### Net-Ninja PWA Lesson 7 - Service Worker Lifecycle
 
@@ -128,10 +129,11 @@ to events happening in the browser: push, fetch etc
   allowfullscreen
 ></iframe>
 
-Scope is important to SWs, they need to be in root to access root files. App.js
-has the task of informing the browser that sw.js should be seen as a SW, and
-allocated its own SW thread. When registered by the browser, there is an
-‘install event’ Once registered, a SW will not be replaced when the browser
-reloads the page Once registered, the SW becomes ‘Active’. At this stage it can
-detect when something has changed, and can listen to get / post events. Note -
-this is important, and I don’t yet fully understand it!!!
+Scope is important to SWs, they need to be in root to access root files.  
+App.js has the task of informing the browser that sw.js should be seen as a SW, and
+allocated its own SW thread.  
+When registered by the browser, there is an
+‘install event’.  
+Once registered, a SW will not be replaced when the browser
+reloads the page.  
+Once registered, the SW becomes ‘Active’. At this stage it can detect when something has changed, and can listen to get / post events.
